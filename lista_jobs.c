@@ -2,12 +2,13 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
+#include <unistd.h>
 
 struct st_no{ 
 	int id;
-	char status[10];
-	char data[10];
-	char horario[5];
+	char status[15];
+	char data[15];
+	char horario[8];
 	struct st_no *prox; // ponteiro
 };
 	typedef struct st_no no; // definindo um tipo "no"(como int, float, char...)
@@ -24,7 +25,10 @@ struct st_no{
 		no *T = P; // T aponta para o primeiro elemnto da lista
 		
 		if(P->id == 0){
-			printf("LISTA VAZIA!!");
+			system("cls");
+			printf("ERRO: LISTA VAZIA!!");
+			sleep(1.5);
+			system("cls");
 		} else{
 				do{
 		    printf("=====================\n");
@@ -34,11 +38,25 @@ struct st_no{
             printf("horario: %s\n", T->horario);
             printf("=====================\n");
 			T = T->prox;
+			printf("\n");
 		}while(T != NULL);	
 	}
-		printf("\n\n");
 	}
+	
+	void exibeJob(){
+		system("cls");
+		
+		printf(" Em um sistema SAP, um 'JOB' refere-se a um conjunto de tarefas\nautomatizadas (construídas por programadores ABAP) \nque são executadas em um horário e dia programado.");
+		printf("\n\n Essas tarefas podem incluir: processamento de dados;\nexecução de relatórios; integração de sistemas etc.\n");
+		printf("Os jobs são frequentemente usados para automatizar processos \nrepetitivos e melhorar a eficiência do sistema. \nCabe ao Consultor BASIS cadastrá-los corretamente.");
+		
+		printf("\n\n");
+		system("pause");
+		system("cls");
+	}
+	
 	void inserirFim(no *P){
+	system("cls");
     no *novo = (no*) malloc(sizeof(no)); 
     no *T = P;
 
@@ -70,18 +88,85 @@ struct st_no{
 	no* retirarInicio(no *P){
 		
 		if(P->id == 0){
-			printf("Lista esta vazia");
+			system("cls");
+			printf("ERRO: LISTA VAZIA!!");
+			sleep(1.5);
+			system("cls");
 		}
 		else{
 			no *T = P;
     			P = T->prox;
     			free(T);
-		}		
+    			
+    	system("cls");
+		printf("Retirando do inicio da lista...");
+		sleep(1);
+		system("cls");	
+		}
+	
+				
 		return P;	
 	}
 	
+	void retirarFim(no *P){
+		no *ant;
+		no *T = P;
+		
+		if(P->id == 0){
+			system("cls");
+			printf("ERRO: LISTA VAZIA!!");
+			sleep(1.5);
+			system("cls");
+		} else {
+			while(T->prox != NULL){
+			ant = T;
+			T = T->prox;			
+		}	
+		ant->prox = NULL;
+		
+		free(T);
+		
+		system("cls");
+		printf("Retirando do fim da lista...");
+		sleep(1);
+		system("cls");	
+		}
+		
+		
+	}
+	
+	void retirarMeio(no *P){
+		no *ant;
+		no *T = P;
+		int valor;
+		
+			if(P->id == 0){
+			system("cls");
+			printf("ERRO: LISTA VAZIA!!");
+			sleep(1.5);
+			system("cls");
+		} else {
+		exibe(P);
+		printf("Informe o iD do JOB que deseja retirar: ");
+		scanf("%d", &valor);
+		 
+		while(T->id != valor){
+			ant = T;
+			T = T->prox;			
+		}
+		ant->prox = T->prox;
+		T -> prox = NULL;
+		
+		system("cls");
+		printf("Retirando o JOB de iD: %d", valor);
+		sleep(2);
+		system("cls");	
+		}
+	}
 	
 int main(){
+	
+	setlocale(LC_ALL, "Portuguese_Brazil");
 	
 	int opcao;
 	
@@ -93,10 +178,11 @@ int main(){
 		
 		printf("----- LISTA DE JOBS ----\n");
 		printf(" 1 - Inserir no FIM da lista: \n");
-		printf(" 2 - Retirar no INICIO da lista: \n");
-		printf(" 3 - Retirar no FIM da lista: \n");
-		printf(" 4 - Retirar no MEIO da lista: \n");
+		printf(" 2 - Retirar do INICIO da lista: \n");
+		printf(" 3 - Retirar do FIM da lista: \n");
+		printf(" 4 - Retirar do MEIO da lista: \n");
 		printf(" 5 - Exibir a lista: \n");
+		printf(" 6 - Exibir dados de um JOB: \n");
 		printf(" 0 - Sair: \n");
 		scanf("%d", &opcao);
 		
@@ -113,8 +199,14 @@ int main(){
 			case 3:
 				retirarFim(P);
 				break;
+			case 4:
+				retirarMeio(P);
+				break;
 			case 5: // exibir
 				exibe(P);
+				break;
+			case 6:
+				exibeJob();
 				break;
 			default:
 			printf("Opcao invalida!!\n");

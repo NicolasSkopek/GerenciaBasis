@@ -3,6 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include <unistd.h>
+#include <windows.h>
 
 struct st_no{ 
 	int id;
@@ -164,8 +165,55 @@ struct st_no{
 		}
 	}
 	
-int main(){
+	void alterarCor(){
+		   system("cls");	
+		   int n;
+		   int opcao;
+		   HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+				
+						printf("1 - LETRAS Vermelhas: \n");
+						printf("2 - LETRAS Verdes: \n");
+						printf("3 - LETRAS Azuis: \n");
+						printf("0 - Voltar para o MENU: \n");
+						scanf("%d", &n);
+
+						switch(n){
+							case 0:
+								system("cls");
+								return;
+							case 1:
+								SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+								break;
+							case 2:
+								SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+								break;
+							case 3:
+								SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
+								break;
+							default:
+								printf("Opção inválida");
+								break;
+						}
+		system("cls");
+	}
 	
+	void alterarTamanho(){
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    CONSOLE_FONT_INFOEX fontInfo;
+    fontInfo.cbSize = sizeof(CONSOLE_FONT_INFOEX);
+    GetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo);
+
+    //tamanho da fonte em 24x12 pixels
+    fontInfo.dwFontSize.X = 30;
+    fontInfo.dwFontSize.Y = 26;
+
+    SetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo);
+	}
+	
+int main(){
+	alterarTamanho();
+    
 	setlocale(LC_ALL, "Portuguese_Brazil");
 	
 	int opcao;
@@ -183,6 +231,7 @@ int main(){
 		printf(" 4 - Retirar do MEIO da lista: \n");
 		printf(" 5 - Exibir a lista: \n");
 		printf(" 6 - Exibir dados de um JOB: \n");
+		printf(" 7 - Customização: \n");
 		printf(" 0 - Sair: \n");
 		scanf("%d", &opcao);
 		
@@ -207,6 +256,9 @@ int main(){
 				break;
 			case 6:
 				exibeJob();
+				break;
+			case 7:
+				alterarCor();	
 				break;
 			default:
 			printf("Opcao invalida!!\n");

@@ -62,12 +62,8 @@ int dequeue(fila* f){ // retirar valor do começo da fila
 		fila* T = inicio; // ponteiro T do tipo fila apontará para o inicio
 		inicio = T->prox; // inicio agora apontará para onde T aponta, ou seja, uma struct após o primeiro
 		free(T);
-		if (inicio == fim){ // se eles estiverem apontando para a mesma struct, signifca que a struct a ser retirada era a última
-			printf("A última Request foi removida!!\n");
-			inicio = NULL;
-			fim = NULL;
-			system("pause");
-		}
+		printf("Removendo Request!!\n");
+		sleep(1.5);
 	}
 }
 
@@ -79,11 +75,14 @@ fila* clear(fila* f){ // limpar a fila inteira
 		sleep(1.5);
 		system("cls");
 		return;	
-	} else {
+	}
+	else {
 		while(q != NULL){
 		fila*  T = q->prox;
 		free(q);
 		q = T;
+		inicio = NULL;
+		fim = NULL;
 	}
 		system("cls");
 		printf("Fila limpa!!\n");
@@ -378,7 +377,10 @@ void menuRequests(fila *f){
 				exibeRequest();
 				break;
 			default:
-				printf("Opcap invalida!!");
+				system("cls");
+				printf("Opção inválida!!\n\n");
+				system("pause");
+				system("cls");
 				break;
 		}
 		
@@ -432,8 +434,11 @@ void menuJobs(no *P){
 				exibeJob();
 				break;
 			default:
-			printf("Opcao invalida!!\n");
-			system("pause");
+				system("cls");
+				printf("Opção inválida!!\n\n");
+				system("pause");
+				system("cls");
+				break;
 		}
 		
 	}while(opcao != 0);
@@ -460,8 +465,8 @@ int main(){
 		do{
 		
 		printf("----- MENU GERÊNCIA BASIS  ----\n"); 
-		printf(" [1] - Menu de JOBS: \n");
-		printf(" [2] - Menu de REQUESTs: \n");
+		printf(" [1] - LISTA de JOBS: \n");
+		printf(" [2] - FILA de REQUESTs: \n");
 		printf(" [3] - Customização: \n");
 		printf(" [0] - Sair do Gerência Basis: \n");
 		printf(" Opção: ");
@@ -481,8 +486,11 @@ int main(){
 				alterarCor();	
 				break;
 			default:
-			printf("Opcao invalida!!\n");
-			system("pause");
+				system("cls");
+				printf("Opção inválida!!\n\n");
+				system("pause");
+				system("cls");
+				break;
 		}
 	}while(opcao != 0);
 	

@@ -26,6 +26,34 @@ fila* criarFila(){ // cria a fila
 	return f;
 }
 
+void sortFila(fila** head_ref) {
+    if (*head_ref == NULL || (*head_ref)->prox == NULL) {
+        return;
+    }
+
+    fila *sorted = NULL;
+    fila *current = *head_ref;
+
+    while (current != NULL) {
+        fila *next = current->prox;
+
+        if (sorted == NULL || sorted->id >= current->id) {
+            current->prox = sorted;
+            sorted = current;
+        } else {
+            fila *temp = sorted;
+            while (temp->prox != NULL && temp->prox->id < current->id) {
+                temp = temp->prox;
+            }
+            current->prox = temp->prox;
+            temp->prox = current;
+        }
+
+        current = next;
+    }
+
+    *head_ref = sorted;
+}
 
 void enqueue(fila* f){ // inserir no fim da fila
 	fila* novo = (fila*) malloc(sizeof(fila)); 
@@ -350,7 +378,8 @@ void menuRequests(fila *f){
 		printf(" [2] - Remover uma Request (dequeue): \n");
 		printf(" [3] - Exibir a Fila: \n");
 		printf(" [4] - Limpar a Fila: \n");
-		printf(" [5] - O que é uma Request?: \n");
+		printf(" [5] - Ordenar a fila: \n");
+		printf(" [6] - O que é uma Request?: \n");
 		printf(" [0] - Retornar para MENU GERÊNCIA BASIS: \n");
 		printf(" Opção: ");
 		scanf("%d", &opcao);
@@ -374,6 +403,12 @@ void menuRequests(fila *f){
 				f = clear(f);
 				break;
 			case 5:
+				system("cls");
+                sortFila(&inicio);
+                printf("Fila ordenada por iD!\n");
+                system("pause");
+                break;
+            case 6:
 				exibeRequest();
 				break;
 			default:

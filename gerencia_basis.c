@@ -148,8 +148,8 @@ void exibeRequest(){
 		system("cls");
 		
 		printf(" Em um sistema SAP, uma 'REQUEST' refere-se a uma ferramente essencial \npara agruprar e gerenciar alterações no sistema SAP.");
-		printf("\n\n Essa ferramentas são veementemente utilizadas em;\nambientes de desenvolvimento(DEV), qualidade(QAS) e produção(PRD)\n");
-		printf("Existem diferentes tipos de requests mas as\nmais comuns são Change Requests e Transport Requests. \nCabe ao Consultor BASIS cadastrá-las corretamente.");
+		printf("\n\n Essa ferramenta é constantemente utilizada em\nambientes de desenvolvimento(DEV), qualidade(QAS) e produção(PRD)\n");
+		printf("Existem diferentes tipos de requests, porém as\nmais comuns são: Change Requests e Transport Requests. \nCabe ao Consultor BASIS cadastrá-las corretamente.");
 		
 		printf("\n\n");
 		system("pause");
@@ -378,7 +378,7 @@ void menuRequests(fila *f){
 		printf(" [2] - Remover uma Request (dequeue): \n");
 		printf(" [3] - Exibir a Fila: \n");
 		printf(" [4] - Limpar a Fila: \n");
-		printf(" [5] - Ordenar a fila: \n");
+		printf(" [5] - Ordenar a Fila: \n");
 		printf(" [6] - O que é uma Request?: \n");
 		printf(" [0] - Retornar para MENU GERÊNCIA BASIS: \n");
 		printf(" Opção: ");
